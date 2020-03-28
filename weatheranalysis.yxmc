@@ -1,0 +1,370 @@
+<?xml version="1.0"?>
+<AlteryxDocument yxmdVer="2019.4">
+  <Nodes>
+    <Node ToolID="1">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.AlteryxSelect.AlteryxSelect">
+        <Position x="330" y="102" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <OrderChanged value="False" />
+          <CommaDecimal value="False" />
+          <SelectFields>
+            <SelectField field="date" selected="True" />
+            <SelectField field="lat" selected="True" />
+            <SelectField field="lon" selected="True" />
+            <SelectField field="air_temp" selected="True" type="Double" size="8" />
+            <SelectField field="country" selected="True" />
+            <SelectField field="*Unknown" selected="False" />
+          </SelectFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="date" size="1073741823" source="TextInput:" type="V_WString" />
+            <Field name="lat" size="1073741823" source="TextInput:" type="V_WString" />
+            <Field name="lon" size="1073741823" source="TextInput:" type="V_WString" />
+            <Field name="air_temp" source="TextInput:" type="Double" />
+            <Field name="country" size="1073741823" source="TextInput:" type="V_WString" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxSelect" />
+    </Node>
+    <Node ToolID="2">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.DateTime.DateTime">
+        <Position x="438" y="90" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <IsFrom value="False" />
+          <InputFieldName>date</InputFieldName>
+          <Format>yyyy-MM-dd hh:mm:ss</Format>
+          <OutputFieldName>DateTime_Out</OutputFieldName>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>Convert date From:
+yyyy-MM-dd hh:mm:ss</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="date" size="1073741823" source="TextInput:" type="V_WString" />
+            <Field name="lat" size="1073741823" source="TextInput:" type="V_WString" />
+            <Field name="lon" size="1073741823" source="TextInput:" type="V_WString" />
+            <Field name="air_temp" source="TextInput:" type="Double" />
+            <Field name="country" size="1073741823" source="TextInput:" type="V_WString" />
+            <Field name="DateTime_Out" source="DateTime: To yyyy-MM-dd hh:mm:ss" type="DateTime" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxDateTime" />
+    </Node>
+    <Node ToolID="3">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.AlteryxSelect.AlteryxSelect">
+        <Position x="690" y="114" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <OrderChanged value="False" />
+          <CommaDecimal value="False" />
+          <SelectFields>
+            <SelectField field="DateTime_Out" selected="True" type="Date" size="10" />
+            <SelectField field="date" selected="False" />
+            <SelectField field="air_temp" selected="True" type="Double" size="8" />
+            <SelectField field="*Unknown" selected="True" />
+          </SelectFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="lat" size="1073741823" source="Summarize: GroupBy - lat" type="V_WString" />
+            <Field name="lon" size="1073741823" source="Summarize: GroupBy - lon" type="V_WString" />
+            <Field name="DateTime_Out" source="Summarize: GroupBy - DateTime_Out" type="Date" />
+            <Field name="Avg_air_temp" source="Summarize: Avg - air_temp" type="Double" />
+            <Field name="country" size="1073741823" source="Summarize: GroupBy - country" type="V_WString" />
+          </RecordInfo>
+          <SortInfo>
+            <Field field="lat" order="Asc" />
+            <Field field="lon" order="Asc" />
+          </SortInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxSelect" />
+    </Node>
+    <Node ToolID="4">
+      <GuiSettings Plugin="AlteryxSpatialPluginsGui.Summarize.Summarize">
+        <Position x="594" y="138" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <SummarizeFields>
+            <SummarizeField field="lat" action="GroupBy" rename="lat" />
+            <SummarizeField field="lon" action="GroupBy" rename="lon" />
+            <SummarizeField field="DateTime_Out" action="GroupBy" rename="DateTime_Out" />
+            <SummarizeField field="air_temp" action="Avg" rename="Avg_air_temp" />
+            <SummarizeField field="country" action="GroupBy" rename="country" />
+          </SummarizeFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="lat" size="1073741823" source="Summarize: GroupBy - lat" type="V_WString" />
+            <Field name="lon" size="1073741823" source="Summarize: GroupBy - lon" type="V_WString" />
+            <Field name="DateTime_Out" source="Summarize: GroupBy - DateTime_Out" type="DateTime" />
+            <Field name="Avg_air_temp" source="Summarize: Avg - air_temp" type="Double" />
+            <Field name="country" size="1073741823" source="Summarize: GroupBy - country" type="V_WString" />
+          </RecordInfo>
+          <SortInfo>
+            <Field field="lat" order="Asc" />
+            <Field field="lon" order="Asc" />
+            <Field field="DateTime_Out" order="Asc" />
+            <Field field="country" order="Asc" />
+          </SortInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxSpatialPluginsEngine.dll" EngineDllEntryPoint="AlteryxSummarize" />
+    </Node>
+    <Node ToolID="5">
+      <GuiSettings Plugin="AlteryxGuiToolkit.Questions.Tab.Tab">
+        <Position x="0" y="0" width="59" height="59" />
+      </GuiSettings>
+      <Properties>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+    </Node>
+    <Node ToolID="7">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.MacroOutput.MacroOutput">
+        <Position x="786" y="126" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Name>Output7</Name>
+          <Abbrev />
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxMacroOutput" />
+    </Node>
+    <Node ToolID="10">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.MacroInput.MacroInput">
+        <Position x="246" y="102" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <UseFileInput value="False" />
+          <Name>Input10</Name>
+          <Abbrev />
+          <ShowFieldMap value="True" />
+          <Optional value="False" />
+          <TextInput>
+            <Configuration>
+              <NumRows value="0" />
+              <Fields>
+                <Field name="Field_1" />
+                <Field name="date" />
+                <Field name="usaf" />
+                <Field name="wban" />
+                <Field name="code" />
+                <Field name="station" />
+                <Field name="lat" />
+                <Field name="lon" />
+                <Field name="elev" />
+                <Field name="wd" />
+                <Field name="ws" />
+                <Field name="ceil_hgt" />
+                <Field name="visibility" />
+                <Field name="air_temp" />
+                <Field name="dew_point" />
+                <Field name="atmos_pres" />
+                <Field name="RH" />
+                <Field name="cl_1" />
+                <Field name="cl_1_height" />
+                <Field name="cl_2" />
+                <Field name="cl_2_height" />
+                <Field name="cl_3" />
+                <Field name="cl_3_height" />
+                <Field name="cl" />
+                <Field name="year" />
+                <Field name="country" />
+              </Fields>
+              <Data />
+            </Configuration>
+          </TextInput>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="True" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="Field_1" size="1073741823" source="TextInput:" type="V_WString" />
+            <Field name="date" size="1073741823" source="TextInput:" type="V_WString" />
+            <Field name="usaf" size="1073741823" source="TextInput:" type="V_WString" />
+            <Field name="wban" size="1073741823" source="TextInput:" type="V_WString" />
+            <Field name="code" size="1073741823" source="TextInput:" type="V_WString" />
+            <Field name="station" size="1073741823" source="TextInput:" type="V_WString" />
+            <Field name="lat" size="1073741823" source="TextInput:" type="V_WString" />
+            <Field name="lon" size="1073741823" source="TextInput:" type="V_WString" />
+            <Field name="elev" size="1073741823" source="TextInput:" type="V_WString" />
+            <Field name="wd" size="1073741823" source="TextInput:" type="V_WString" />
+            <Field name="ws" size="1073741823" source="TextInput:" type="V_WString" />
+            <Field name="ceil_hgt" size="1073741823" source="TextInput:" type="V_WString" />
+            <Field name="visibility" size="1073741823" source="TextInput:" type="V_WString" />
+            <Field name="air_temp" size="1073741823" source="TextInput:" type="V_WString" />
+            <Field name="dew_point" size="1073741823" source="TextInput:" type="V_WString" />
+            <Field name="atmos_pres" size="1073741823" source="TextInput:" type="V_WString" />
+            <Field name="RH" size="1073741823" source="TextInput:" type="V_WString" />
+            <Field name="cl_1" size="1073741823" source="TextInput:" type="V_WString" />
+            <Field name="cl_1_height" size="1073741823" source="TextInput:" type="V_WString" />
+            <Field name="cl_2" size="1073741823" source="TextInput:" type="V_WString" />
+            <Field name="cl_2_height" size="1073741823" source="TextInput:" type="V_WString" />
+            <Field name="cl_3" size="1073741823" source="TextInput:" type="V_WString" />
+            <Field name="cl_3_height" size="1073741823" source="TextInput:" type="V_WString" />
+            <Field name="cl" size="1073741823" source="TextInput:" type="V_WString" />
+            <Field name="year" size="1073741823" source="TextInput:" type="V_WString" />
+            <Field name="country" size="1073741823" source="TextInput:" type="V_WString" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxMacroInput" />
+    </Node>
+  </Nodes>
+  <Connections>
+    <Connection>
+      <Origin ToolID="1" Connection="Output" />
+      <Destination ToolID="2" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="2" Connection="Output" />
+      <Destination ToolID="4" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="3" Connection="Output" />
+      <Destination ToolID="7" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="4" Connection="Output" />
+      <Destination ToolID="3" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="10" Connection="Output" />
+      <Destination ToolID="1" Connection="Input" />
+    </Connection>
+  </Connections>
+  <Properties>
+    <Memory default="True" />
+    <GlobalRecordLimit value="0" />
+    <TempFiles default="True" />
+    <Annotation on="True" includeToolName="False" />
+    <ConvErrorLimit value="10" />
+    <ConvErrorLimit_Stop value="False" />
+    <CancelOnError value="False" />
+    <DisableBrowse value="False" />
+    <EnablePerformanceProfiling value="False" />
+    <DisableAllOutput value="False" />
+    <ShowAllMacroMessages value="False" />
+    <ShowConnectionStatusIsOn value="True" />
+    <ShowConnectionStatusOnlyWhenRunning value="True" />
+    <ZoomLevel value="0" />
+    <LayoutType>Horizontal</LayoutType>
+    <Constants>
+      <Constant>
+        <Namespace>Question</Namespace>
+        <Name>Macro Output (7)</Name>
+        <Value />
+        <IsNumeric value="False" />
+      </Constant>
+      <Constant>
+        <Namespace>Question</Namespace>
+        <Name>Macro Input (10)</Name>
+        <Value />
+        <IsNumeric value="False" />
+      </Constant>
+    </Constants>
+    <MetaInfo>
+      <NameIsFileName value="True" />
+      <Name>weatheranalysis</Name>
+      <Description />
+      <RootToolName />
+      <ToolVersion />
+      <ToolInDb value="False" />
+      <CategoryName />
+      <SearchTags />
+      <Author />
+      <Company />
+      <Copyright />
+      <DescriptionLink actual="" displayed="" />
+      <Example>
+        <Description />
+        <File />
+      </Example>
+    </MetaInfo>
+    <Events>
+      <Enabled value="True" />
+    </Events>
+    <RuntimeProperties>
+      <Actions />
+      <Questions>
+        <Question>
+          <Type>Tab</Type>
+          <Description>Questions</Description>
+          <Name>Tab (5)</Name>
+          <ToolId value="5" />
+          <Questions>
+            <Question>
+              <Type>MacroOutput</Type>
+              <Description>Macro Output (7)</Description>
+              <Name>Macro Output (7)</Name>
+              <ToolId value="7" />
+            </Question>
+            <Question>
+              <Type>MacroInput</Type>
+              <Description>Macro Input (10)</Description>
+              <Name>Macro Input (10)</Name>
+              <ToolId value="10" />
+            </Question>
+          </Questions>
+        </Question>
+      </Questions>
+      <ModuleType>Macro</ModuleType>
+      <MacroCustomHelp value="False" />
+      <MacroDynamicOutputFields value="False" />
+      <MacroImageStd value="39" />
+      <MacroInputs />
+      <MacroOutputs />
+      <Wiz_CustomHelp value="False" />
+      <Wiz_CustomGraphic value="False" />
+      <Wiz_ShowOutput value="True" />
+      <Wiz_OpenOutputTools>
+        <Tool ToolId="10" Selected="True" />
+        <Tool ToolId="7" Selected="True" />
+      </Wiz_OpenOutputTools>
+      <Wiz_OutputMessage />
+      <Wiz_NoOutputFilesMessage />
+      <Wiz_ChainRunWizard />
+    </RuntimeProperties>
+  </Properties>
+</AlteryxDocument>
