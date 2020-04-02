@@ -1,11 +1,11 @@
 library(worldmet)
 getMeta(site = "sydney")
-getMeta(site = "delhi")
+getMeta(site = "xiangong")
 
-getMeta(lat = 37.0902, lon = -95.7129)
+getMeta(lat = 30.9756, lon = 112.2707)
 
-importNOAA(code = "724519-93967", year = 2020,hourly = FALSE,path = "~/Google Drive/Data Analytics/Predictive HR Analytics/COVID-19/weather")
+importNOAA(code = "947680-99999", year = 2020,hourly = FALSE,path = "~/Google Drive/Data Analytics/Predictive HR Analytics/COVID-19/weather")
 
 
-my.data <- readRDS("usa.rds")
-write.csv(my.data,file = "usa.csv")
+my.data <- readRDS("sydney.rds")
+write.csv(my.data,file = "sydney.csv")
